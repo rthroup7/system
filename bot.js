@@ -450,4 +450,13 @@ client.on('message', message => {
     }
 });
 
+client.on('message', msg => {
+  if (msg.content === '-help') {
+   msg.reply('**تم ارصاب في الخاص **');
+  }
+});
+
+
+
+
 client.login(process.env.BOT_TOKEN);
