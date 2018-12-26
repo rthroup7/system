@@ -428,4 +428,15 @@ message.author.sendEmbed(embed)
 
 }
 });
+
+client.on('message', msg => {
+
+  if (msg.content === '-help') {
+
+    msg.reply('**  :outbox_tray:  تم ارسال في الخاص **');
+
+  }
+
+});
+
 client.login(process.env.BOT_TOKEN);
