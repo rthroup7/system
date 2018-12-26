@@ -423,7 +423,13 @@ client.on("message", message => {
 
 ● ▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬ ●
 
-`);
+`)
+
+
+message.author.send
+
+}
+});
 
 
 client.on('message', msg => {
