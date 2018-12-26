@@ -381,7 +381,8 @@ if (message.content.startsWith("-cv")) {
     
 }
 });
-  
+
+
 client.on("message", message => {
  if (message.content === prefix + "help") {
   const embed = new Discord.RichEmbed()
@@ -426,20 +427,9 @@ client.on("message", message => {
 `)
 
 
-message.author.send
+message.author.sendEmbed(embed)
 
 }
-});
-
-
-client.on('message', msg => {
-
-  if (msg.content === '-help') {
-
-    msg.reply('**  :outbox_tray:  تم ارسال في الخاص **');
-
-  }
-
 });
 
 client.on('message', message => {
