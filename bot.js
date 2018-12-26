@@ -452,7 +452,8 @@ client.on('message', message => {
     )
   message.channel.send(`** تم أرسال الرابط برسالة خاصة **`)
 
-      message.author.send(`**هذا الرابط لاربع اشخاص و لمدة 24 ساعة **`)
+      message.author.send(`**هذا الرابط  لمدة 24 ساعة
+صالح لي 15 شخص فقط**`)
     }
 });
 
