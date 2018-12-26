@@ -389,7 +389,7 @@ client.on("message", message => {
       .setThumbnail(message.author.avatarURL)
       .setDescription(`
 
-** Bot ${client.user.username} Commands **
+** BOT  ${client.user.username} Commands **
 ● ▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬ ●
 ** -    [ ${prefix}kick ]  [ @user <reason> | طرد الشخص من السيرفر ]
 
@@ -417,7 +417,7 @@ client.on("message", message => {
 
 -    [ ${prefix}cv ] [name> | انشاء رووم فويس]
 
--    [ ${prefix}delet ] [<name> | مسح الشات او الرووم فويس]**
+-    [ ${prefix}delet ] [<name> | مسح الشات او الرووم فويس]
 
 -    ازا تريد انشاء رابط او لينك للسيرفر اكتب  رابط  **
 
