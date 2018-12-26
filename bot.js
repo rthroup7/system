@@ -452,7 +452,7 @@ client.on('message', message => {
 
 client.on('message', msg => {
   if (msg.content === '-help') {
-   msg.reply('**تم ارصاب في الخاص **');
+   msg.reply('**تم ارسال في الخاص **');
   }
 });
 
