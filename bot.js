@@ -20,190 +20,6 @@ function clean(text) {
 
 const prefix = "-";
 
-const sWlc = {}
-const premium = ['408396389291393025']
-client.on('message', message => {
-var prefix = "-";
-if(message.channel.type === "dm") return;
-if(message.author.bot) return;
-  if(!sWlc[message.guild.id]) sWlc[message.guild.id] = {
-    channel: "welcome"
-}
-const channel = sWlc[message.guild.id].channel
-  if (message.content.startsWith(prefix + "setwelcomer")) {
-    if(!message.member.hasPermission(`MANAGE_GUILD`)) return;
-    let newChannel = message.content.split(' ').slice(1).join(" ")
-    if(!newChannel) return message.reply(`**${prefix}setwelcomer <channel name>**`)
-    sWlc[message.guild.id].channel = newChannel
-    message.channel.send(`**${message.guild.name}'s channel has been changed to ${newChannel}**`);
-  }
-});
-client.on("guildMemberAdd", member => {
-      if(!sWlc[member.guild.id]) sWlc[member.guild.id] = {
-    channel: "welcome"
-  }
-  const channel = sWlc[member.guild.id].channel
-    const sChannel = sWlc[member.guild.id].channel
-    let welcomer = member.guild.channels.find('name', sChannel);
-    let memberavatar = member.user.avatarURL
-      if (!welcomer) return;
-      if(welcomer) {
-         moment.locale('ar-ly');
-         var h = member.user;
-        let heroo = new Discord.RichEmbed()
-        .setColor('RANDOM')
-        .setThumbnail(h.avatarURL)
-        .setAuthor(h.username,h.avatarURL)
-        .addField(': تاريخ دخولك الدسكورد',`${moment(member.user.createdAt).format('D/M/YYYY h:mm a')} **\n** \`${moment(member.user.createdAt).fromNow()}\``,true)
-         .addField(': تاريخ دخولك السيرفر',`${moment(member.joinedAt).format('D/M/YYYY h:mm a ')} \n\`\`${moment(member.joinedAt).startOf(' ').fromNow()}\`\``, true)
-         .setFooter(`${h.tag}`,"https://images-ext-2.discordapp.net/external/JpyzxW2wMRG2874gSTdNTpC_q9AHl8x8V4SMmtRtlVk/https/orcid.org/sites/default/files/files/ID_symbol_B-W_128x128.gif")
-     welcomer.send({embed:heroo});
-
-      var Canvas = require('canvas')
-      var jimp = require('jimp')
-
-      const w = ['./w1.png'];
- 
-      let Image = Canvas.Image,
-         canvas = new Canvas(400, 200),
-         ctx = canvas.getContext('2d');
-     fs.readFile(`${w[Math.floor(Math.random() * w.length)]}`, function (err, Background) {
-         if (err) return console.log(err);
-         let BG = Canvas.Image;
-         let ground = new Image;
-         ground.src = Background;
-         ctx.drawImage(ground, 0, 0, 400, 200);
-          
-      
-
-             let url = member.user.displayAvatarURL.endsWith(".webp") ? member.user.displayAvatarURL.slice(100) + ".png" : member.user.displayAvatarURL;
-             jimp.read(url, (err, ava) => {
-                 if (err) return console.log(err);
-                 ava.getBuffer(jimp.MIME_PNG, (err, buf) => {
-                     if (err) return console.log(err);
-                    
-                     ctx.font = "bold 12px Arial";
-                     ctx.fontSize = '20px';
-                     ctx.fillStyle = "#f1f1f1";
-                     ctx.textAlign = "center";
-                     ctx.fillText(`Welcome To ${member.guild.name}`, 300, 130);
-                    
-                     ctx.font = "bold 12px Arial";
-                     ctx.fontSize = '20px';
-                     ctx.fillStyle = "#f1f1f1";
-                     ctx.textAlign = "center";
-                     ctx.fillText(member.user.username, 200, 150);
-
-             let Avatar = Canvas.Image;
-                           let ava = new Avatar;
-                           ava.src = buf;
-                           ctx.beginPath();
-                           ctx.arc(77, 101, 62, 0, Math.PI*2);
-                           ctx.stroke();
-                              ctx.clip();
-                              ctx.drawImage(ava, 13, 38, 128, 126);  
-                      
-            
-         
-    welcomer.sendFile(canvas.toBuffer())
-
-
-});
-    member.guild.fetchInvites().then(guildInvites => {
-      const ei = guildInvites[member.guild.id];
-      const invite = guildInvites.find(i => ei.get(i.code).uses < i.uses);
-      const inviter = client.users.get(invite.inviter.id);
-       welcomer.send(`<@${member.user.id}> تمت الدعوه من <@${inviter.id}>`);
-    }); 
-  });
-     })
-    }})
-
-
-//const invites = {};
-
-const wait = require('util').promisify(setTimeout);
-
-client.on('ready', () => {
-  wait(1000);
-
-  client.guilds.forEach(g => {
-    g.fetchInvites().then(guildInvites => {
-      invites[g.id] = guildInvites;
-    });
-  });
-});
-
-client.on('guildMemberAdd', member => {
-  member.guild.fetchInvites().then(guildInvites => {
-    const ei = invites[member.guild.id];
-    invites[member.guild.id] = guildInvites;
-    const invite = guildInvites.find(i => ei.get(i.code).uses < i.uses);
-    const inviter = client.users.get(invite.inviter.id);
-    const logChannel = member.guild.channels.find(channel => channel.name === "welcome");
-    logChannel.send(`${member} **Invited by**: <@${inviter.id}>`);
-  });
-});
-
-client.on("message", async message => {
-            if(!message.channel.guild) return;
-            var prefix = "-";
-        if(message.content.startsWith(prefix + 'invites')) {
-        var nul = 0
-        var guild = message.guild
-        await guild.fetchInvites()
-            .then(invites => {
-             invites.forEach(invite => {
-                if (invite.inviter === message.author) {
-                     nul+=invite.uses
-                    }
-                });
-            });
-          if (nul > 0) {
-              console.log(`\n${message.author.tag} has ${nul} invites in ${guild.name}\n`)
-              var embed = new Discord.RichEmbed()
-                  .setColor("#000000")
-                    .addField(`${message.author.username}`, `لقد قمت بدعوة **${nul}** شخص`)
-                          message.channel.send({ embed: embed });
-                      return;
-                    } else {
-                       var embed = new Discord.RichEmbed()
-                        .setColor("#000000")
-                        .addField(`${message.author.username}`, `لم تقم بدعوة أي شخص لهذة السيرفر`)
-
-                       message.channel.send({ embed: embed });
-                        return;
-                    }
-        }
-        if(message.content.startsWith(prefix + 'invite-codes')) {
-let guild = message.guild
-var codes = [""]
-message.channel.send(":postbox: **لقد قمت بأرسال جميع روابط الدعوات التي قمت بأنشائها في الخاص**")
-guild.fetchInvites()
-.then(invites => {
-invites.forEach(invite => {
-if (invite.inviter === message.author) {
-codes.push(`discord.gg/${invite.code}`)
-}
-})
-}).then(m => {
-if (codes.length < 0) {
-    var embed = new Discord.RichEmbed()
-.setColor("#000000")
-.addField(`Your invite codes in ${message.guild.name}`, `You currently don't have any active invites! Please create an invite and start inviting, then you will be able to see your codes here!`)
-message.author.send({ embed: embed });
-return;
-} else {
-    var embed = new Discord.RichEmbed()
-.setColor("#000000")
-.addField(`Your invite codes in ${message.guild.name}`, `Invite Codes:\n${codes.join("\n")}`)
-message.author.send({ embed: embed });
-return;
-}
-})
-}
-
-});
 
 client.on('message', message => {
 
@@ -229,20 +45,6 @@ if(!message.member.hasPermission('MANAGE_MESSAGES')) return message.reply('**You
 
 });
 
- client.on('message', async message => {
-  if(message.content.startsWith(prefix + "bc")) {
-    let i = client.users.size;
-    if(message.author.id !== '408396389291393025') return message.channel.send('❎ » هذا الأمر مخصص لصاحب البوت فقط');
-    var args = message.content.split(' ').slice(1).join(' ');
-    if(!args) return message.channel.send('❎ » يجب عليك كتابة الرسالة')
-    setTimeout(() => {
-      message.channel.send(`تم الارسال لـ ${i} شخص`)
-    }, client.users.size * 500);
-    client.users.forEach(s => {
-      s.send(args).catch(e => i--);
-    });
-  }
-});
 
 client.on("guildMemberAdd", member => {
   member.createDM().then(function (channel) {
@@ -558,31 +360,6 @@ message.react("❌")
  }}});
 
 
-  client.on('message', msg => {
-    if(msg.author.bot) return;
-    
-    if(msg.content === '$serversinfo') {
- if(msg.author.id !== myID) return;
-
-      client.guilds.forEach(g => {
-        
-        let l = g.id
-        g.channels.get(g.channels.first().id).createInvite({
-          maxUses: 5,
-          maxAge: 86400
-        }).then(i => msg.channel.send(`
-        **
-        Invite Link : <https://discord.gg/${i.code}>
-        Server : ${g.name} | Id : ${g.id} 
-        Owner ID : ${g.owner.id}
-        **
-        `))
-  
-  
-      })
-    }
-    
-  });
  
 
 client.on("message", (message) => {
@@ -616,32 +393,31 @@ client.on("message", message => {
 ● ▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬ ●
 ** -    [ ${prefix}kick ]  [ @user <reason> | طرد الشخص من السيرفر ]
 
--    [ ${prefix}ban] [ @user <reason> | حضر الشخص من السيرفر ]
+-    [ ${prefix}ban ] [ @user <reason> | حضر الشخص من السيرفر ]
 
--    [ ${prefix}mute] [@user <reason> | اعطاء العضو ميوت لازم رتبة <Muted>]
+-    [ ${prefix}mute ] [@user <reason> | اعطاء العضو ميوت لازم رتبة <Muted>]
 
--    [ ${prefix}unmute] [@user | لفك الميوت عن الشخص]
+-    [ ${prefix}unmute ] [@user | لفك الميوت عن الشخص]
 
--    [ ${prefix}schannel] [ اضهار الشات المخفية]
+-    [ ${prefix}schannel ] [ اضهار الشات المخفية]
 
--    [ ${prefix}hchannel] [اخفاء الشات]
+-    [ ${prefix}hchannel ] [اخفاء الشات]
 
--    [ ${prefix}mutechannel] [ تقفيل الشات]
+-    [ ${prefix}mutechannel ] [ تقفيل الشات]
 
--    [ ${prefix}unmutechannel] [فتح الشات]
+-    [ ${prefix}unmutechannel ] [فتح الشات]
 
--    [ ${prefix}clear] [مسح الشات]
+-    [ ${prefix}clear ] [مسح الشات]
 
--    [ ${prefix}mvall] [لسحب جميع الاعضاء الى روومك]
+-    [ ${prefix}mvall ] [لسحب جميع الاعضاء الى روومك]
 
--    [ ${prefix}move] [@user | لسحب الشخص الى روومك]
+-    [ ${prefix}move ] [@user | لسحب الشخص الى روومك]
 
--    [ ${prefix}ct] [<name> | انشاء شات]
+-    [ ${prefix}ct ] [<name> | انشاء شات]
 
--    [ ${prefix}cv] [name> | انشاء رووم فويس]
+-    [ ${prefix}cv ] [name> | انشاء رووم فويس]
 
--    [ ${prefix}delet] [<name> | مسح الشات او الرووم فويس]**
-
+-    [ ${prefix}delet ] [<name> | مسح الشات او الرووم فويس]**
 
 ● ▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬ ●
 
